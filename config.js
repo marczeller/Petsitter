@@ -6,7 +6,7 @@ exports.config = {
     password : '',
     // this can be an infura endpoint or your own node.
     //provider : 'https://mainnet.infura.io/v3/a3456c11324745b7966ca0208ca8de4b',
-    provider : 'https://polygon-mainnet.g.alchemy.com/v2/eCOapPZ9mpejAfalYFI1QYiM-3yfiULC',
+    provider : '',
     // tokens smart-contracts address
     diamondAddress : '0x86935f11c86623dec8a25696e1c19a8659cbf95d',
     myAddress : ''
