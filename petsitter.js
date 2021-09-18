@@ -17,15 +17,6 @@ async function Launcher() {
       parseInt(GasPrice) +
       parseInt(web3.utils.toHex(web3.utils.toWei("0.8888", "gwei")));
     GasPrice = GasPrice.toFixed(0);
-    let tellGotchis = await contractGotchi.methods
-      .tokenIdsOfOwner(myAddress)
-      .call();
-  
-    let GotchiArray = [];
-  
-    for (i in tellGotchis) {
-      GotchiArray.push(parseInt(tellGotchis[i]));
-    }
   
     const rawTransaction = {
       from: myAddress,
@@ -37,11 +28,27 @@ async function Launcher() {
       nonce: nonce,
     };
 
-    function sleep(ms) {
+    async function findMyGotchis() {
+      
+    let tellGotchis = await contractGotchi.methods
+    .tokenIdsOfOwner(myAddress)
+    .call();
+
+    let GotchiArray = [];
+
+    for (i in tellGotchis) {
+    GotchiArray.push(parseInt(tellGotchis[i]));
+    }
+    return GotchiArray
+    };
+
+    async function sleep(ms) {
       return new Promise(
         resolve => setTimeout(resolve, ms)
       );
     };
+
+
 
     async function sync() {
       yourGotchis = await contractGotchi.methods
@@ -54,6 +61,7 @@ async function Launcher() {
     }
   
     async function FillRawTx() {
+      await findMyGotchis()
       rawTransaction.data = contractpet.methods.interact(GotchiArray).encodeABI();
       rawTransaction.to = diamondAddress;
       rawTransaction.gas = 100000;
@@ -93,8 +101,7 @@ async function Launcher() {
       console.log("ah damn he we go again");
     }
     await sleep(20000)
-    setInterval(petTheGotchi, 60000)
+    setInterval(petTheGotchi, 9000)
   }
-  
   Launcher();
   
