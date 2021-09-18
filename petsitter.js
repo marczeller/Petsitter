@@ -61,7 +61,7 @@ async function Launcher() {
     }
   
     async function FillRawTx() {
-      await findMyGotchis()
+      let GotchiArray = await findMyGotchis()
       rawTransaction.data = contractpet.methods.interact(GotchiArray).encodeABI();
       rawTransaction.to = diamondAddress;
       rawTransaction.gas = 100000;
