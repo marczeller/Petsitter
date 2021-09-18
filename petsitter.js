@@ -101,7 +101,7 @@ async function Launcher() {
       console.log("ah damn he we go again");
     }
     await sleep(20000)
-    setInterval(petTheGotchi, 30000)
+    setInterval(petTheGotchi, 100000)
   }
   Launcher();
   
