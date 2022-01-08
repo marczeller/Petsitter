@@ -42,14 +42,6 @@ async function Launcher() {
     return GotchiArray
     };
 
-    async function sleep(ms) {
-      return new Promise(
-        resolve => setTimeout(resolve, ms)
-      );
-    };
-
-
-
     async function sync() {
       yourGotchis = await contractGotchi.methods
         .allAavegotchisOfOwner(myAddress)
@@ -64,10 +56,9 @@ async function Launcher() {
       let GotchiArray = await findMyGotchis()
       rawTransaction.data = contractpet.methods.interact(GotchiArray).encodeABI();
       rawTransaction.to = diamondAddress;
-      rawTransaction.gas = 100000;
+      rawTransaction.gas = 500000;
       rawTransaction.nonce = await web3.eth.getTransactionCount(
         myAddress,
-        "pending"
       );
   
       return rawTransaction;
@@ -88,20 +79,15 @@ async function Launcher() {
             });
         } catch (error) {
           console.log(error);
-          await sleep(20000)
-          console.log("oh no an error")
-          await petTheGotchi();
         }
       } else {
         console.log("Gotchi Already happy ser, wait a bit", Timeremaining);
         
       }
-  
       delete rawTransaction.nonce;
-      console.log("ah damn he we go again");
+      console.log("let's wait for next cronjob launch");
     }
-    await sleep(20000)
-    setInterval(petTheGotchi, 100000)
+  petTheGotchi();
   }
   Launcher();
   
