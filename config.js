@@ -1,7 +1,7 @@
 exports.config = {
     // just paste between the '' information needed
     // Paste the content of your Keystore file here
-    keystore : ''
+    keystore : '',
     // this is why you don't want your config file shared publicly, make sure this script run somewhere safe
     password : '',
     // this can be an infura endpoint or your own node.
